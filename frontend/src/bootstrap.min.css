@@ -446,6 +446,7 @@ mark,
   border: 1px solid #eceeef;
   max-width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 .figure {
   display: inline-block;
