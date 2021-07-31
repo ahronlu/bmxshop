@@ -218,7 +218,7 @@ label {
   margin-bottom: 0.5rem;
 }
 button {
-  border-radius: 0;
+  border-radius: 5px;
 }
 button:focus {
   outline: 1px dotted;
@@ -2097,7 +2097,7 @@ pre code {
   background-color: #333;
   background-clip: padding-box;
   border: 0px solid #ced4da;
-  border-radius: 0;
+  border-radius: 5px;
   -webkit-transition: border-color 0.15s ease-in-out,
     -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out,
@@ -2601,7 +2601,7 @@ textarea.form-control.is-invalid {
   padding: 0.75rem 1.5rem;
   font-size: 0.875rem;
   line-height: 1.5rem;
-  border-radius: 0;
+  border-radius: 5px;
   -webkit-transition: color 0.15s ease-in-out,
     background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     -webkit-box-shadow 0.15s ease-in-out;
@@ -3215,14 +3215,14 @@ fieldset:disabled a.btn {
   padding: 2rem 2rem;
   font-size: 1.09375rem;
   line-height: 1.5;
-  border-radius: 0;
+  border-radius: 5px;
 }
 .btn-sm,
 .btn-group-sm > .btn {
   padding: 0.5rem 1rem;
   font-size: 0.765625rem;
   line-height: 1.5;
-  border-radius: 0;
+  border-radius: 5px;
 }
 .btn-block {
   display: block;
@@ -3837,7 +3837,7 @@ input[type="button"].btn-block {
   left: -2.25rem;
   width: 1.75rem;
   pointer-events: all;
-  border-radius: 0.5rem;
+  border-radius: 5px;
 }
 .custom-switch .custom-control-label::after {
   top: calc(0.15625rem + 0px);
@@ -3845,7 +3845,7 @@ input[type="button"].btn-block {
   width: calc(1rem - 0px);
   height: calc(1rem - 0px);
   background-color: #adb5bd;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   -webkit-transition: background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out,
     -webkit-box-shadow 0.15s ease-in-out;
@@ -3887,7 +3887,7 @@ input[type="button"].btn-block {
     url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e")
     no-repeat right 1.5rem center/8px 10px;
   border: 0px solid #ced4da;
-  border-radius: 0;
+  border-radius: 5px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
