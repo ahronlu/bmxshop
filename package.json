@@ -1,5 +1,5 @@
 {
-  "name": "BMX Shop",
+  "name": "bmx-shop",
   "version": "1.0.0",
   "description": "MERN shopping cart app",
   "main": "server.js",
