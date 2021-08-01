@@ -4303,6 +4303,7 @@ input[type="button"].btn-block {
 .navbar-nav .dropdown-menu {
   position: static;
   float: none;
+  border-radius: 5px;
 }
 .navbar-text {
   display: inline-block;
