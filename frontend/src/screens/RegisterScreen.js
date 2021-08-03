@@ -89,7 +89,13 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary">
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={
+            !email || !name || password < 6 || password !== confirmPassword
+          }
+        >
           Register
         </Button>
       </Form>
@@ -97,7 +103,10 @@ const RegisterScreen = ({ location, history }) => {
       <Row className="py-3">
         <Col>
           Have an Account?{" "}
-          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+          <Link
+            to={redirect ? `/login?redirect=${redirect}` : "/login"}
+            style={{ color: "#fff" }}
+          >
             Login
           </Link>
         </Col>
