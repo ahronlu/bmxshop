@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { register } from "../actions/userActions";
+import { register as registerUser } from "../actions/userActions";
 
 const RegisterScreen = ({ location, history }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, errors },
+    watch,
+  } = useForm({
+    mode: "onChange",
+  });
+
+  const password = useRef({});
+  password.current = watch("password", "");
 
   const dispatch = useDispatch();
 
@@ -27,42 +34,46 @@ const RegisterScreen = ({ location, history }) => {
     }
   }, [history, userInfo, redirect]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
-    } else {
-      dispatch(register(name, email, password));
-    }
+  const submitHandler = ({ name, email, password }) => {
+    dispatch(registerUser(name, email, password));
   };
 
   return (
     <FormContainer>
       <h1>Sign Up</h1>
-      {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
-      <Form onSubmit={submitHandler}>
+      <Form onSubmit={handleSubmit(submitHandler)}>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
-            type="name"
             placeholder="Enter name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
+            isInvalid={!!errors.name}
+            {...register("name", {
+              required: "Name is required",
+            })}
           ></Form.Control>
+          <Form.Control.Feedback type="invalid">
+            {errors.name?.message}
+          </Form.Control.Feedback>
         </Form.Group>
-
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
-            type="email"
             placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            isInvalid={!!errors.email}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                message: "Please enter a valid email",
+              },
+            })}
           ></Form.Control>
+          <Form.Control.Feedback type="invalid">
+            {errors.email?.message}
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group controlId="password">
@@ -70,32 +81,42 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             type="password"
             placeholder="Enter password"
-            value={password}
-            minLength="6"
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            isInvalid={!!errors.password}
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must have at least 6 characters",
+              },
+              pattern: {
+                message: "Please enter a valid password with at least 6 chars",
+              },
+            })}
           ></Form.Control>
+          <Form.Control.Feedback type="invalid">
+            {errors.password?.message}
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
+            isValid={!!errors.confirmPassword}
             placeholder="Confirm password"
-            value={confirmPassword}
-            minLength="6"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            {...register("confirmPassword", {
+              required: "Confirm Password is required",
+              validate: {
+                value: (value) =>
+                  value === password.current || "The passwords do not match",
+              },
+            })}
           ></Form.Control>
+          <Form.Control.Feedback type="invalid">
+            {errors.confirmPassword?.message}
+          </Form.Control.Feedback>
         </Form.Group>
-
-        <Button
-          type="submit"
-          variant="primary"
-          disabled={
-            !email || !name || password < 6 || password !== confirmPassword
-          }
-        >
+        <Button type="submit" variant="primary" disabled={!isValid}>
           Register
         </Button>
       </Form>
