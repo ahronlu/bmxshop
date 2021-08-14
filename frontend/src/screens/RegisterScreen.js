@@ -75,7 +75,6 @@ const RegisterScreen = ({ location, history }) => {
             {errors.email?.message}
           </Form.Control.Feedback>
         </Form.Group>
-
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -97,12 +96,11 @@ const RegisterScreen = ({ location, history }) => {
             {errors.password?.message}
           </Form.Control.Feedback>
         </Form.Group>
-
         <Form.Group controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
-            isValid={!!errors.confirmPassword}
+            isInvalid={!!errors.confirmPassword}
             placeholder="Confirm password"
             {...register("confirmPassword", {
               required: "Confirm Password is required",
@@ -120,7 +118,6 @@ const RegisterScreen = ({ location, history }) => {
           Register
         </Button>
       </Form>
-
       <Row className="py-3">
         <Col>
           Have an Account?{" "}
