@@ -12,7 +12,7 @@ const RegisterScreen = ({ location, history }) => {
   const {
     register,
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { errors, isSubmitting, isValid, dirtyFields },
     watch,
   } = useForm({
     mode: "onChange",
@@ -49,6 +49,7 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             placeholder="Enter name"
             isInvalid={!!errors.name}
+            isValid={!errors.name && dirtyFields.name}
             {...register("name", {
               required: "Name is required",
             })}
@@ -62,6 +63,7 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             placeholder="Enter email"
             isInvalid={!!errors.email}
+            isValid={!errors.email && dirtyFields.email}
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -81,6 +83,7 @@ const RegisterScreen = ({ location, history }) => {
             type="password"
             placeholder="Enter password"
             isInvalid={!!errors.password}
+            isValid={!errors.password && dirtyFields.password}
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -101,6 +104,7 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             type="password"
             isInvalid={!!errors.confirmPassword}
+            isValid={!errors.confirmPassword && dirtyFields.confirmPassword}
             placeholder="Confirm password"
             {...register("confirmPassword", {
               required: "Confirm Password is required",
@@ -114,7 +118,11 @@ const RegisterScreen = ({ location, history }) => {
             {errors.confirmPassword?.message}
           </Form.Control.Feedback>
         </Form.Group>
-        <Button type="submit" variant="primary" disabled={!isValid}>
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={!isValid || isSubmitting}
+        >
           Register
         </Button>
       </Form>

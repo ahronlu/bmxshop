@@ -12,7 +12,7 @@ const LoginScreen = ({ location, history }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid, dirtyFields },
   } = useForm({
     mode: "onChange",
   });
@@ -44,6 +44,7 @@ const LoginScreen = ({ location, history }) => {
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             isInvalid={!!errors.email}
+            isValid={!errors.email && dirtyFields.email}
             placeholder="Enter email"
             {...register("email", {
               required: "Email is required",
@@ -64,6 +65,7 @@ const LoginScreen = ({ location, history }) => {
             type="password"
             placeholder="Enter password"
             isInvalid={!!errors.password}
+            isValid={!errors.password && dirtyFields.password}
             {...register("password", {
               required: "Password is required",
               minLength: {
