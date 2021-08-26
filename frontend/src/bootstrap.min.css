@@ -157,12 +157,12 @@ sup {
   top: -0.5em;
 }
 a {
-  color: #1a1a1a;
+  color: #fafafa;
   text-decoration: none;
   background-color: transparent;
 }
 a:hover {
-  color: black;
+  color: fff;
   text-decoration: underline;
 }
 a:not([href]):not([class]) {
@@ -2141,7 +2141,7 @@ pre code {
 }
 .form-control:disabled,
 .form-control[readonly] {
-  opacity: .65;
+  opacity: 0.65;
 }
 input[type="date"].form-control,
 input[type="time"].form-control,
